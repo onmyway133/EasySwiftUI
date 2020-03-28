@@ -17,6 +17,12 @@ public extension SwiftUI.Image {
             .resizable()
             .aspectRatio(contentMode: .fit)
     }
+
+    func styleButton() -> some View {
+        return self
+        .resizable()
+        .frame(width: 20, height: 20)
+    }
 }
 
 #endif
