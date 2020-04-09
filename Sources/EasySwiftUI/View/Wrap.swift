@@ -13,7 +13,7 @@ import SwiftUI
 import UIKit
 
 public struct Wrap<Wrapped: UIView>: UIViewRepresentable {
-    typealias Updater = (Wrapped, Context) -> Void
+    public typealias Updater = (Wrapped, Context) -> Void
 
     var makeView: () -> Wrapped
     var update: (Wrapped, Context) -> Void
