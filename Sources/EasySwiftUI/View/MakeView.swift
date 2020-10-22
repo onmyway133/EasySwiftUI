@@ -13,6 +13,10 @@ import SwiftUI
 public struct MakeView: View {
     let make: () -> AnyView
 
+    public init(make: @escaping () -> AnyView) {
+        self.make = make
+    }
+
     public var body: some View {
         make()
     }
