@@ -10,10 +10,16 @@
 
 import SwiftUI
 
-@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 public struct ActivityIndicator: UIViewRepresentable {
-    @Binding var isAnimating: Bool
+    @Binding
+    var isAnimating: Bool
     let style: UIActivityIndicatorView.Style
+
+    public init(isAnimating: Binding<Bool>, style: UIActivityIndicatorView) {
+        self._isAnimating = isAnimating
+        self.style = style
+    }
 
     public func makeUIView(context: UIViewRepresentableContext<ActivityIndicator>) -> UIActivityIndicatorView {
         return UIActivityIndicatorView(style: style)
@@ -25,3 +31,34 @@ public struct ActivityIndicator: UIViewRepresentable {
 }
 
 #endif
+
+#if canImport(AppKit) && os(macOS)
+
+import SwiftUI
+
+@available(OSX 10.15, *)
+public struct ActivityIndicator: NSViewRepresentable {
+    @Binding
+    var isAnimating: Bool
+
+    public init(isAnimating: Binding<Bool>) {
+        self._isAnimating = isAnimating
+    }
+
+    public func makeNSView(context: NSViewRepresentableContext<ActivityIndicator>) -> NSProgressIndicator {
+        let indicator = NSProgressIndicator(frame: .zero)
+        indicator.style = .spinning
+        indicator.controlTint = NSControlTint.blueControlTint
+        return indicator
+    }
+
+    public func updateNSView(
+        _ nsView: NSProgressIndicator,
+        context: NSViewRepresentableContext<ActivityIndicator>) {
+        isAnimating ? nsView.startAnimation(nil) : nsView.stopAnimation(nil)
+    }
+}
+
+#endif
+
+
