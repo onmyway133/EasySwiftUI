@@ -22,6 +22,15 @@ public struct HighlightButtonStyle: ButtonStyle {
         self.cornerRadius = cornerRadius
     }
 
+    public init(
+        padding: CGFloat = 8,
+        cornerRadius: CGFloat = 4
+    ) {
+        self.horizontalPadding = padding
+        self.verticalPadding = padding
+        self.cornerRadius = cornerRadius
+    }
+
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .padding(.horizontal, horizontalPadding)
