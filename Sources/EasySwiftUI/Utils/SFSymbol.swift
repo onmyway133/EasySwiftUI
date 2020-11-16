@@ -14,7 +14,7 @@ import Foundation
 
 import SwiftUI
 
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 13.0, macOS 11.0, tvOS 13.0, watchOS 6.0, *)
 public extension SwiftUI.Image {
 
     /// Creates a instance of `Image` with a system symbol image of the given type.
@@ -28,7 +28,7 @@ public extension SwiftUI.Image {
 
 #endif
 
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@available(iOS 13.0, macOS 11.0, tvOS 13.0, watchOS 6.0, *)
 public enum SFSymbol: String, CaseIterable {
     case _00Circle = "00.circle"
     case _00CircleFill = "00.circle.fill"
