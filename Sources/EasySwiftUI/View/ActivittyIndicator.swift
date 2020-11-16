@@ -16,7 +16,7 @@ public struct ActivityIndicator: UIViewRepresentable {
     var isAnimating: Bool
     let style: UIActivityIndicatorView.Style
 
-    public init(isAnimating: Binding<Bool>, style: UIActivityIndicatorView) {
+    public init(isAnimating: Binding<Bool>, style: UIActivityIndicatorView.Style) {
         self._isAnimating = isAnimating
         self.style = style
     }
