@@ -10,18 +10,6 @@ import SwiftUI
 
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 public extension View {
-    func embedInScrollView(alignment: Alignment = .center) -> some View {
-        GeometryReader { proxy in
-            ScrollView {
-                self.frame(
-                    minHeight: proxy.size.height,
-                    maxHeight: .infinity,
-                    alignment: alignment
-                )
-            }
-        }
-    }
-
     func erase() -> AnyView {
         return AnyView(self)
     }
