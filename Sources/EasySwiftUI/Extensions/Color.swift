@@ -32,7 +32,7 @@ public extension SwiftUI.Color {
 #endif
 
 #if canImport(UIKit)
-extension Color {
+public extension Color {
 
     // MARK: - Text Colors
     static let lightText = Color(UIColor.lightText)
@@ -88,7 +88,7 @@ extension Color {
 #endif
 
 #if canImport(AppKit)
-extension Color {
+public extension Color {
     // MARK: - Label Colors
     static let label = Color(NSColor.labelColor)
     static let secondaryLabel = Color(NSColor.secondaryLabelColor)
