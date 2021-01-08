@@ -35,4 +35,22 @@ public struct VisualEffectView: NSViewRepresentable {
     }
 }
 
+#else
+
+public struct VisualEffectView: UIViewRepresentable {
+    let effect: UIVisualEffect
+
+    public init(effect: UIVisualEffect) {
+        self.effect = effect
+    }
+
+    public func makeUIView(context: Context) -> UIVisualEffectView {
+        UIVisualEffectView()
+    }
+
+    public func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = effect
+    }
+}
+
 #endif
