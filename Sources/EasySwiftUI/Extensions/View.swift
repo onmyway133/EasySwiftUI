@@ -36,15 +36,3 @@ public extension View {
         }
     }
 }
-
-
-#if canImport(AppKit)
-public extension View {
-    func toolTip(_ text: String) -> some View {
-        return self
-            .background(
-                ToolTip(text)
-            )
-    }
-}
-#endif
