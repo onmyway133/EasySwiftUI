@@ -32,33 +32,3 @@ public struct ActivityIndicator: UIViewRepresentable {
 
 #endif
 
-#if canImport(AppKit) && os(macOS)
-
-import SwiftUI
-
-@available(OSX 10.15, *)
-public struct ActivityIndicator: NSViewRepresentable {
-    @Binding
-    var isAnimating: Bool
-
-    public init(isAnimating: Binding<Bool>) {
-        self._isAnimating = isAnimating
-    }
-
-    public func makeNSView(context: NSViewRepresentableContext<ActivityIndicator>) -> NSProgressIndicator {
-        let indicator = NSProgressIndicator(frame: .zero)
-        indicator.style = .spinning
-        indicator.controlTint = NSControlTint.blueControlTint
-        return indicator
-    }
-
-    public func updateNSView(
-        _ nsView: NSProgressIndicator,
-        context: NSViewRepresentableContext<ActivityIndicator>) {
-        isAnimating ? nsView.startAnimation(nil) : nsView.stopAnimation(nil)
-    }
-}
-
-#endif
-
-

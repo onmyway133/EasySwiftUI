@@ -130,7 +130,8 @@ public extension Color {
 import AppKit
 public extension Color {
     static func dynamic(dark: Int, light: Int) -> Color {
-        return NSAppearance.current.isDarkMode ? Color(hex: dark) : Color(hex: light)
+        let isDark = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
+        return isDark ? Color(hex: dark) : Color(hex: light)
     }
 
     // MARK: - Text Colors
@@ -145,11 +146,11 @@ public extension Color {
 
     // MARK: - Gray Colors
     static let systemGray = Color(NSColor.systemGray)
-    static let systemGray2 = Color.dynamic(dark: 0x636366FF, light: 0xAEAEB2FF)
-    static let systemGray3 = Color.dynamic(dark: 0x48484AFF, light: 0xC7C7CCFF)
-    static let systemGray4 = Color.dynamic(dark: 0x3A3A3CFF, light: 0xD1D1D6FF)
-    static let systemGray5 = Color.dynamic(dark: 0x2C2C2EFF, light: 0xE5E5EAFF)
-    static let systemGray6 = Color.dynamic(dark: 0x1C1C1EFF, light: 0xF2F2F7FF)
+    static let systemGray2 = Color.dynamic(dark: 0x636366, light: 0xAEAEB2)
+    static let systemGray3 = Color.dynamic(dark: 0x48484A, light: 0xC7C7CC)
+    static let systemGray4 = Color.dynamic(dark: 0x3A3A3C, light: 0xD1D1D6)
+    static let systemGray5 = Color.dynamic(dark: 0x2C2C2E, light: 0xE5E5EA)
+    static let systemGray6 = Color.dynamic(dark: 0x1C1C1E, light: 0xF2F2F7)
 
     // MARK: - Other Colors
     static let separator = Color(NSColor.separatorColor)

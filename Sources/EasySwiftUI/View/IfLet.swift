@@ -23,10 +23,8 @@ public struct IfLet<T, Content: View>: View {
     }
 
     public var body: some View {
-        Group {
-            if value != nil {
-                build(value!)
-            }
+        if let value = value {
+            build(value)
         }
     }
 }
