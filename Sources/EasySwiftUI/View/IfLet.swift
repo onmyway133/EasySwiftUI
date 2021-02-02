@@ -6,27 +6,21 @@
 //  Copyright © 2019 Khoa Pham. All rights reserved.
 //
 
-#if canImport(SwiftUI)
-
 import SwiftUI
-
-// https://engineering.q42.nl/swiftui-optionals/
 
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct IfLet<T, Content: View>: View {
     let value: T?
-    let build: (T) -> Content
+    let content: (T) -> Content
 
-    public init(_ value: T?, build: @escaping (T) -> Content) {
+    public init(_ value: T?, @ViewBuilder content: @escaping (T) -> Content) {
         self.value = value
-        self.build = build
+        self.content = content
     }
 
     public var body: some View {
         if let value = value {
-            build(value)
+            content(value)
         }
     }
 }
-
-#endif
