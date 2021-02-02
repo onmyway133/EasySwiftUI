@@ -14,17 +14,12 @@ public extension View {
         return AnyView(self)
     }
 
-    func styleMultiline() -> some View {
-        return self
-            .lineLimit(nil)
-            .fixedSize(horizontal: false, vertical: true)
-    }
-
-    func applyIf<T: View>(_ condition: @autoclosure () -> Bool, apply: (Self) -> T) -> AnyView {
+    @ViewBuilder
+    func applyIf<T: View>(_ condition: @autoclosure () -> Bool, apply: (Self) -> T) -> some View {
         if condition() {
-            return apply(self).erase()
+            apply(self)
         } else {
-            return self.erase()
+            self
         }
     }
 

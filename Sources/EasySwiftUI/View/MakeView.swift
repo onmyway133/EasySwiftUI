@@ -5,15 +5,13 @@
 //  Created by khoa on 22/05/2020.
 //
 
-#if canImport(SwiftUI)
-
 import SwiftUI
 
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
-public struct MakeView: View {
-    let make: () -> AnyView
+public struct MakeView<Content: View>: View {
+    let make: () -> Content
 
-    public init(make: @escaping () -> AnyView) {
+    public init(make: @escaping () -> Content) {
         self.make = make
     }
 
@@ -21,5 +19,3 @@ public struct MakeView: View {
         make()
     }
 }
-
-#endif
