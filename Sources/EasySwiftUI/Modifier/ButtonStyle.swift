@@ -27,7 +27,7 @@ public struct HighlightButtonStyle: ButtonStyle {
             .padding(.horizontal, hPadding)
             .padding(.vertical, vPadding)
             .contentShape(Rectangle())
-            .background(configuration.isPressed ? Color.white.opacity(0.1) : Color.clear)
+            .background(configuration.isPressed ? Color.separator : Color.clear)
             .cornerRadius(cornerRadius)
     }
 }
