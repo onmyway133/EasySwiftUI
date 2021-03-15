@@ -50,18 +50,6 @@ public extension SwiftUI.Color {
             opacity: Double(a) / 255
         )
     }
-
-    @available(iOS 14.0, OSX 11.0, *)
-    var isLight: Bool {
-        guard
-            let components = cgColor?.components,
-            components.count >= 3
-        else { return false }
-
-        let brightness = ((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000
-
-        return brightness >= 0.5
-    }
 }
 
 #if canImport(UIKit)
