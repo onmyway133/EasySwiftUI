@@ -24,7 +24,7 @@ public struct MyTextField: NSViewRepresentable {
         tf.isBordered = false
         tf.drawsBackground = false
         tf.delegate = context.coordinator
-        tf.font = NSFont.systemFont(ofSize: 16, weight: .semibold)
+        tf.font = NSFont.preferredFont(forTextStyle: .body, options: [:])
         return tf
     }
 
