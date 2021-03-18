@@ -13,9 +13,14 @@ import AppKit
 public struct MyTextField: NSViewRepresentable {
     @Binding
     var text: String
+    let font: NSFont
 
-    public init(text: Binding<String>) {
+    public init(
+        text: Binding<String>,
+        font: NSFont = NSFont.preferredFont(forTextStyle: .body, options: [:])
+    ) {
         self._text = text
+        self.font = font
     }
 
     public func makeNSView(context: Context) -> NSTextField {
@@ -24,7 +29,7 @@ public struct MyTextField: NSViewRepresentable {
         tf.isBordered = false
         tf.drawsBackground = false
         tf.delegate = context.coordinator
-        tf.font = NSFont.preferredFont(forTextStyle: .body, options: [:])
+        tf.font = self.font
         return tf
     }
 
