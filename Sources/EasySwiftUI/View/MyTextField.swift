@@ -14,13 +14,16 @@ public struct MyTextField: NSViewRepresentable {
     @Binding
     var text: String
     let font: NSFont
+    let alignment: NSTextAlignment
 
     public init(
         text: Binding<String>,
-        font: NSFont = NSFont.preferredFont(forTextStyle: .body, options: [:])
+        font: NSFont = NSFont.preferredFont(forTextStyle: .body, options: [:]),
+        alignment: NSTextAlignment = .left
     ) {
         self._text = text
         self.font = font
+        self.alignment = alignment
     }
 
     public func makeNSView(context: Context) -> NSTextField {
@@ -30,6 +33,7 @@ public struct MyTextField: NSViewRepresentable {
         tf.drawsBackground = false
         tf.delegate = context.coordinator
         tf.font = self.font
+        tf.alignment = alignment
         return tf
     }
 
