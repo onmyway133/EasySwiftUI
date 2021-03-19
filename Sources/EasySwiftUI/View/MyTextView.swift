@@ -13,9 +13,14 @@ import UIKit
 public struct MyTextView: UIViewRepresentable {
     @Binding
     var text: String
+    let isEditable: Bool
 
-    public init(text: Binding<String>) {
+    public init(
+        text: Binding<String>,
+        isEditable: Bool = true
+    ) {
         self._text = text
+        self.isEditable = isEditable
     }
 
     public final class Coordinator: NSObject, UITextViewDelegate {
@@ -48,6 +53,7 @@ public struct MyTextView: UIViewRepresentable {
         view.smartInsertDeleteType = .no
         view.font = UIFont.preferredFont(forTextStyle: .body)
         view.delegate = context.coordinator
+        view.isEditable = isEditable
         return view
     }
 
@@ -71,13 +77,16 @@ public struct MyTextView: NSViewRepresentable {
     var text: String
     @Binding
     var isFocus: Bool
+    let isEditable: Bool
 
     public init(
         text: Binding<String>,
-        isFocus: Binding<Bool>
+        isFocus: Binding<Bool>,
+        isEditable: Bool = true
     ) {
         self._text = text
         self._isFocus = isFocus
+        self.isEditable = isEditable
     }
 
 
@@ -109,7 +118,7 @@ public struct MyTextView: NSViewRepresentable {
         textView.font = NSFont.preferredFont(forTextStyle: .body, options: [:])
         textView.delegate = context.coordinator
         textView.isSelectable = true
-        textView.isEditable = true
+        textView.isEditable = isEditable
 
         return scrollView
     }
