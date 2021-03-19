@@ -13,15 +13,18 @@ import AppKit
 public struct MyTextField: NSViewRepresentable {
     @Binding
     var text: String
+    let placeholder: String?
     let font: NSFont
     let alignment: NSTextAlignment
 
     public init(
         text: Binding<String>,
+        placeholder: String? = nil,
         font: NSFont = NSFont.preferredFont(forTextStyle: .body, options: [:]),
         alignment: NSTextAlignment = .left
     ) {
         self._text = text
+        self.placeholder = placeholder
         self.font = font
         self.alignment = alignment
     }
@@ -34,6 +37,7 @@ public struct MyTextField: NSViewRepresentable {
         tf.delegate = context.coordinator
         tf.font = self.font
         tf.alignment = alignment
+        tf.placeholderString = placeholder
         return tf
     }
 
