@@ -11,9 +11,9 @@ import SwiftUI
 // https://gist.github.com/mecid/e0d4d6652ccc8b5737449a01ee8cbc6f
 // https://swiftwithmajid.com/2019/12/25/building-pager-view-in-swiftui/
 public struct PagerView<Content: View>: View {
-    let pageCount: Int
-    let onDone: () -> Void
-    let content: Content
+    private let pageCount: Int
+    private let onDone: () -> Void
+    private let content: Content
 
     @Binding
     var currentIndex: Int
@@ -63,6 +63,7 @@ public struct PagerView<Content: View>: View {
         VStack {
             Spacer()
             button
+                .animation(nil)
                 .padding(.bottom, 8)
             pageControl
         }
@@ -71,25 +72,46 @@ public struct PagerView<Content: View>: View {
 
     private var pageControl: some View {
         HStack {
-            ForEach(0..<self.pageCount, id: \.self) { index in
+            ForEach(0 ..< self.pageCount, id: \.self) { index in
                 Circle()
                     .fill(index == self.currentIndex ? Color.accentColor : Color.secondary)
                     .frame(width: 8, height: 8)
+                    .animation(nil)
             }
         }
     }
 
+    @ViewBuilder
     private var button: some View {
-        let text = currentIndex == pageCount - 1 ? "Start" : "Next"
-        return Button(action: onButton) {
+        if currentIndex == pageCount - 1 {
+            doneButton
+        } else {
+            nextButton
+        }
+    }
+
+    private var nextButton: some View {
+        Button(action: onNext) {
+            RoundedRectangle(cornerRadius: 16)
+                .strokeBorder(Color.accentColor)
+                .frame(width: 240, height: 32)
+                .overlay(
+                    Text("Next".uppercased())
+                        .bold()
+                )
+        }
+        .buttonStyle(BorderlessButtonStyle())
+    }
+
+    private var doneButton: some View {
+        Button(action: onDone) {
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.accentColor)
                 .frame(width: 240, height: 32)
                 .overlay(
-                    Text(text.uppercased())
+                    Text("Start".uppercased())
                         .bold()
                         .foregroundColor(Color.white)
-                        .animation(nil)
                 )
         }
         .buttonStyle(BorderlessButtonStyle())
@@ -99,16 +121,16 @@ public struct PagerView<Content: View>: View {
         VStack {
             Spacer()
             HStack {
-                makeButton(action: onPrevious, symbol: .chevronLeft)
+                navigateButton(action: onPrevious, symbol: .chevronLeft)
                 Spacer()
-                makeButton(action: onNext, symbol: .chevronRight)
+                navigateButton(action: onNext, symbol: .chevronRight)
             }
             .padding(.horizontal, 6)
             Spacer()
         }
     }
 
-    private func makeButton(action: @escaping () -> Void, symbol: SFSymbol) -> some View {
+    private func navigateButton(action: @escaping () -> Void, symbol: SFSymbol) -> some View {
         Button(action: action) {
             Image(systemName: symbol.rawValue)
                 .resizable()
@@ -117,14 +139,6 @@ public struct PagerView<Content: View>: View {
                 .foregroundColor(Color.secondary)
         }
         .buttonStyle(HighlightButtonStyle(h: 4, v: 4, cornerRadius: 2))
-    }
-
-    private func onButton() {
-        if currentIndex == pageCount - 1 {
-            onDone()
-        } else {
-            onNext()
-        }
     }
 
     private func onPrevious() {
@@ -139,3 +153,4 @@ public struct PagerView<Content: View>: View {
         }
     }
 }
+
