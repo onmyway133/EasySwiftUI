@@ -7,6 +7,87 @@
 
 import SwiftUI
 
+public struct OnboardPageItem: Identifiable {
+    public let id = UUID()
+
+    let title: String
+    let subtitle: String
+    let image: String
+    let size: CGSize?
+
+    public init(
+        title: String,
+        subtitle: String,
+        image: String,
+        size: CGSize? = nil
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.image = image
+        self.size = size
+    }
+}
+
+public struct OnboardView: View {
+    let items: [OnboardPageItem]
+    let onDone: () -> Void
+
+    public init(
+        items: [OnboardPageItem],
+        onDone: @escaping () -> Void
+    ) {
+        self.items = items
+        self.onDone = onDone
+    }
+
+    public var body: some View {
+        OnboardPagerView(pageCount: items.count, onDone: onDone) {
+            ForEach(items) { item in
+                OnboardPageView(item: item)
+            }
+        }
+    }
+}
+
+private struct OnboardPageView: View {
+    let item: OnboardPageItem
+
+    var body: some View {
+        VStack {
+            Text(item.title)
+                .font(.title)
+                .padding(.bottom, 16)
+                .padding(.horizontal, 16)
+
+            Text(item.subtitle)
+                .multilineTextAlignment(.center)
+                .foregroundColor(Color.secondary)
+                .padding(.horizontal, 24)
+                .padding(.bottom, 32)
+
+            Group {
+                if let size = item.size {
+                    Image(item.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(
+                            width: size.width,
+                            height: size.height
+                        )
+                } else {
+                    Image(item.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .cornerRadius(8)
+                }
+            }
+        }
+    }
+}
+
+
 public struct OnboardPagerView<Content: View>: View {
     private let pageCount: Int
     private let onDone: () -> Void
@@ -36,7 +117,7 @@ public struct OnboardPagerView<Content: View>: View {
 
                 navigation
             }
-            .padding(.top, 32)
+            .padding(.top, 40)
 
             footer
         }
