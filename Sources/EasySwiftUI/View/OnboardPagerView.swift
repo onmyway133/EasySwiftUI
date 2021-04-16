@@ -49,10 +49,14 @@ public struct OnboardView: View {
     }
 }
 
-private struct OnboardPageView: View {
+public struct OnboardPageView: View {
     let item: OnboardPageItem
+    
+    public init(item: OnboardPageItem) {
+        self.item = item
+    }
 
-    var body: some View {
+    public var body: some View {
         VStack {
             Text(item.title)
                 .font(.title)
