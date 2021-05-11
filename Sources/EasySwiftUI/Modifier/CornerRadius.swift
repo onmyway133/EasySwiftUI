@@ -38,7 +38,7 @@ public extension View {
 
 #endif
 
-#if canImport(AppKit)
+#if os(OSX)
 
 public struct RoundedCorners: Shape {
     let tl: CGFloat

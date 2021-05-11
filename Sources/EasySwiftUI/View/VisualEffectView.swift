@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-#if canImport(AppKit)
+#if os(OSX)
 
 public struct VisualEffectView: NSViewRepresentable {
     let material: NSVisualEffectView.Material

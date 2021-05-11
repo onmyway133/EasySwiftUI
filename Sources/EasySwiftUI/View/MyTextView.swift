@@ -66,7 +66,7 @@ public struct MyTextView: UIViewRepresentable {
 
 #endif
 
-#if canImport(AppKit)
+#if os(OSX)
 import Combine
 import AppKit
 

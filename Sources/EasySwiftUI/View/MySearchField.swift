@@ -5,7 +5,7 @@
 //  Created by khoa on 18/03/2021.
 //
 
-#if canImport(AppKit)
+#if os(OSX)
 import SwiftUI
 import AppKit
 

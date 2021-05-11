@@ -110,7 +110,7 @@ public extension Color {
 }
 #endif
 
-#if canImport(AppKit)
+#if os(OSX)
 import AppKit
 public extension Color {
     static func dynamic(dark: Int, light: Int) -> Color {

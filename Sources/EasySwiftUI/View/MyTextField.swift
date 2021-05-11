@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-#if canImport(AppKit)
+#if os(OSX)
 import AppKit
 
 public struct MyTextField: NSViewRepresentable {

@@ -27,7 +27,7 @@ public struct HUD<Content>: View where Content: View {
     }
 
     private var effect: some View {
-        #if canImport(AppKit)
+        #if os(OSX)
         return VisualEffectView(material: .popover)
             .clipShape(RoundedRectangle(cornerRadius: 12))
         #else
