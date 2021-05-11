@@ -5,7 +5,7 @@
 //  Created by khoa on 18/12/2020.
 //
 
-#if canImport(AppKit)
+#if os(OSX)
 import AppKit
 
 public extension NSAppearance {
