@@ -41,10 +41,30 @@ public extension View {
 #if os(OSX)
 
 public struct RoundedCorners: Shape {
+    public struct NSRectCorner: OptionSet {
+        public static let topLeft = NSRectCorner(rawValue: 1)
+        public static let topRight = NSRectCorner(rawValue: 1 << 1)
+        public static let bottomLeft = NSRectCorner(rawValue: 1 << 2)
+        public static let bottomRight = NSRectCorner(rawValue: 1 << 3)
+
+        public let rawValue: Int8
+
+        public init(rawValue: Int8) {
+            self.rawValue = rawValue
+        }
+    }
+
     let tl: CGFloat
     let tr: CGFloat
     let bl: CGFloat
     let br: CGFloat
+
+    public init(radius: CGFloat, corners: NSRectCorner) {
+        self.tl = corners.contains(.topLeft) ? radius : 0
+        self.tr = corners.contains(.topRight) ? radius : 0
+        self.bl = corners.contains(.bottomLeft) ? radius : 0
+        self.br = corners.contains(.bottomRight) ? radius : 0
+    }
 
     public init(tl: CGFloat = 0, tr: CGFloat = 0, bl: CGFloat = 0, br: CGFloat = 0) {
         self.tl = tl
