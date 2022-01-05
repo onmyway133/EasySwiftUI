@@ -40,20 +40,20 @@ public extension View {
 
 #if os(OSX)
 
-public struct RoundedCorners: Shape {
-    public struct NSRectCorner: OptionSet {
-        public static let topLeft = NSRectCorner(rawValue: 1)
-        public static let topRight = NSRectCorner(rawValue: 1 << 1)
-        public static let bottomLeft = NSRectCorner(rawValue: 1 << 2)
-        public static let bottomRight = NSRectCorner(rawValue: 1 << 3)
+public struct NSRectCorner: OptionSet {
+    public static let topLeft = NSRectCorner(rawValue: 1)
+    public static let topRight = NSRectCorner(rawValue: 1 << 1)
+    public static let bottomLeft = NSRectCorner(rawValue: 1 << 2)
+    public static let bottomRight = NSRectCorner(rawValue: 1 << 3)
 
-        public let rawValue: Int8
+    public let rawValue: Int8
 
-        public init(rawValue: Int8) {
-            self.rawValue = rawValue
-        }
+    public init(rawValue: Int8) {
+        self.rawValue = rawValue
     }
+}
 
+public struct RoundedCorner: Shape {
     let tl: CGFloat
     let tr: CGFloat
     let bl: CGFloat
@@ -103,6 +103,12 @@ public struct RoundedCorners: Shape {
                     startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 270), clockwise: false)
 
         return path
+    }
+}
+
+public extension View {
+    func cornerRadius(_ radius: CGFloat, corners: NSRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }
 
